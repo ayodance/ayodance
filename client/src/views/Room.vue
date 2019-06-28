@@ -1,6 +1,6 @@
 <template>
 <div id="room">    
-    <div style="padding-top: 5%;">
+    <div style="padding-top: 2%;">
      <b-container style="background-color: #640F21; color: white; padding: 20px; border: 4px solid black;">
          <form @submit.prevent="create">
              <b-row>
@@ -58,8 +58,8 @@ export default {
                 roomMaster: localStorage.getItem('player'),
                 totalPlayers: this.totalPlayers
             })
-            .then(function() {
-                console.log('success')
+            .then((docRef) => {
+              this.$router.push(`/lobby/${docRef.id}`)
             })
             .catch(function(error) {
                 console.log(err)
