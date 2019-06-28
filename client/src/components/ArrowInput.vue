@@ -60,19 +60,15 @@ export default {
 
             if(this.arrowInput.length<4) {
                 if (e.keyCode == '38') {
-                    console.log('up');
                     this.PUSH_TO_ARROW_INPUT('fa-chevron-up')
                 }
                 else if (e.keyCode == '40') {
-                    console.log('down');
                     this.PUSH_TO_ARROW_INPUT('fa-chevron-down')
                 }
                 else if (e.keyCode == '37') {
-                    console.log('left');
                     this.PUSH_TO_ARROW_INPUT('fa-chevron-left')
                 }
                 else if (e.keyCode == '39') {
-                    console.log('right');
                     this.PUSH_TO_ARROW_INPUT('fa-chevron-right')
                 }
             }
@@ -83,7 +79,7 @@ export default {
             }
 
             // delete
-            if (e.keyCode == '8') {
+            if (e.keyCode == '16') {
                 this.POP_ARROW_INPUT()
             }
         },
