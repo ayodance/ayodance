@@ -3,7 +3,7 @@
     <b-container class="pt-5">
       <div class="d-flex justify-content-between">
         <div class="player-chat w-75 mx-5">
-          <b-list-group-item href="#" style="background-color: #66101F; color: whitesmoke;" class="flex-column align-items-start lobby-heading">
+          <b-list-group-item href="#" style="background-color: #66101F; color: whitesmoke !important;" class="flex-column align-items-start lobby-heading">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1" style="font-weight: bold;">Chat Room</h5>
             </div>
@@ -13,10 +13,14 @@
           <b-list-group style="height:300px; background-color: white; overflow: auto;">
             <b-list-group-item v-for="message in enteredMsg" :key="message.id" class="d-flex justify-content-between align-items-center">
               <div>
-                <span style="font-weight:bold;">{{ message.player }}: </span> {{ message.message }}
+                <span style="font-weight:bold; color: #616161 !important;">{{ message.player }}: </span>  
+                <span style="color: #616161 !important;">
+                {{ message.message }}
+
+                </span>
               </div>
 
-              <small class="text-muted">{{ message.time }}</small>
+              <small class="text-muted color: #616161 !important;">{{ message.time }}</small>
             </b-list-group-item>
           </b-list-group>
 
@@ -30,7 +34,7 @@
         <div class="player-list">
           <b-list-group-item style="background-color: #66101F; color: whitesmoke;" class="flex-column align-items-start lobby-heading">
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1" style="font-weight: bold;">Players</h5>
+              <h5 class="mb-1" style="font-weight: bold; color: #616161 !important;">Players</h5>
             </div>
 
             <p class="mb-1">
