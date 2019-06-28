@@ -9,7 +9,6 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_PLAYER(state, payload){
-      // console.log(payload, '=======')
       state.player = payload
     }
   },
