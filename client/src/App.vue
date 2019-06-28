@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import db from '@/config/firebase'
 import Register from './views/Register'
 import Room from './views/Room'
 import Lobby from './components/lobby'
