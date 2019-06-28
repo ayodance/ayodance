@@ -51,7 +51,7 @@ audio {
 .arrows {
     position: absolute;
     left: 39%;
-    top: 30%;
+    top: 50%;
     width: 250px;
 }
 .bg-img {

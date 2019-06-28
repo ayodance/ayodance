@@ -6,7 +6,8 @@
                 v-for="(player, index) in players"
                 :key="index"
             >
-                <img :src="player.img_url" alt="" style="width: 35%;">
+                <div class="nametag">{{player.name}}</div>
+                <img :src="player.img_url" alt="" style="width: 30%;">
             </b-col>
         </b-row>
     </div>
@@ -41,5 +42,14 @@ export default {
 </script>
 
 <style>
-
+.nametag {
+    background-color: #fff;
+    width: 84px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0px;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
 </style>
