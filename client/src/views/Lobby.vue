@@ -74,10 +74,10 @@ export default {
       ],
       roomId: '',
       roomMaster: '',
-      currentPlayer: ''
+      currentPlayer: '',
+      ready: '' 
     }
   },
-  
   created() {  
     this.roomId = this.$route.params.id
     this.currentPlayer = localStorage.player
@@ -95,11 +95,31 @@ export default {
         this.roomMaster = doc.data().roomMaster
         this.enteredMsg = messages
         this.players = arr
+        this.ready = doc.data().ready
     });
+  },
+  mounted() {
+    if(this.ready) {
+      this.$router.push(`/ingame/${this.roomId}`)
+    }
+  },
+  watch: {
+    ready() {
+      if(this.ready) {
+      this.$router.push(`/ingame/${this.roomId}`)
+      }
+    }
   },
   methods: {
     ingame(id) {
-      this.$router.push(`/ingame/${id}`)
+      let room = db.collection("rooms").doc(id)
+      
+      room.update({
+        ready: true
+      })
+      .then(() => {
+        this.ready=true
+      })
     },
     sendMessage() {
       let date = new Date()

@@ -10,10 +10,24 @@
 
 <script>
 import {mapState} from 'vuex'
+import db from '@/config/firebase'
 
 export default {
+    data() {
+        return {
+            players: []
+        }
+    },
     computed: {
-        ...mapState(['players'])
+        // ...mapState(['players'])
+    },
+    created() {
+        let roomId = this.$route.params.id
+
+        db.collection('rooms').doc(roomId)
+        .onSnapshot((doc) => {
+            this.players=doc.data().players
+        })
     },
     mounted() {
         console.log(this.players);

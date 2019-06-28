@@ -67,13 +67,12 @@ export default {
             room
                 .get()
                 .then((doc) => {
-                    // console.log(doc.data())
-
                     let players = doc.data().players
                     
                     let newPlayer = {
                         name: localStorage.player,
                         combo: 1,
+                        score: 0,
                         img_url: `https://storage.googleapis.com/miniwp_image-storage/dance${random}.gif`
                     }
                     players.push(newPlayer)

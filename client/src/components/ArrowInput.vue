@@ -24,14 +24,14 @@
             ></b-form-input>
             <div>
                 <span class="condition">{{condition}}</span>
-                <span class="combo animated bounce infinite" v-if="players[0].combo > 1">Combo {{players[0].combo}}</span>
+                <!-- <span class="combo animated bounce infinite" v-if="players[0].combo > 1">Combo {{players[0].combo}}</span> -->
             </div>
         </div>
     </div>
 </template>
-
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
+import db from '@/config/firebase.js'
 
 export default {
     data() {
@@ -51,7 +51,7 @@ export default {
     },
     methods: {
         ...mapActions(['generateRandomArrow']),
-        ...mapMutations(['EMPTY_ARROW_LIST', 'EMPTY_ARROW_INPUT', 'PUSH_TO_ARROW_INPUT', 'POP_ARROW_INPUT']),
+        ...mapMutations(['EMPTY_ARROW_LIST', 'EMPTY_ARROW_INPUT', 'PUSH_TO_ARROW_INPUT', 'POP_ARROW_INPUT', 'SET_PLAYER']),
         outside: function(e) {
             this.$refs.arrowInput.$el.focus()
         },
@@ -84,14 +84,38 @@ export default {
             }
         },
         arraysEqual(arr1, arr2) {
-            if(arr1.toString() == arr2.toString()) {
-                this.condition='GREAT !'
-                this.players[0].score+=this.players[0].combo*1
-                this.players[0].combo++
-            }else{
-                this.condition='Wrong !'
-                this.players[0].combo = 1
-            }
+            let roomId = this.$route.params.id
+            let room = db.collection("rooms").doc(roomId)
+        
+            room
+                .get()
+                .then((doc) => {
+                    let players = doc.data().players
+                    for(let player of players) {
+                        if(player.name === localStorage.player) {
+                            if(arr1.toString() == arr2.toString()) {
+                                this.condition='GREAT !'
+                                player.score+=player.combo*1
+                                player.combo=player.combo++
+
+                            }else{
+                                this.condition='Wrong !'
+                                player.combo=1
+                            }
+                        }
+                    }
+
+                this.SET_PLAYER(players)
+                
+                return room.update({
+                    players
+                })
+            })
+            .then((hasil) => {
+            })
+            .catch(err => {
+                console.log('errr', err);
+            })
 
             this.EMPTY_ARROW_LIST()
             this.EMPTY_ARROW_INPUT()

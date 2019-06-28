@@ -5,26 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    players: [
-      {
-        name: 'lutfi',
-        score: 0,
-        combo: 1,
-        img_url: 'https://storage.googleapis.com/miniwp_image-storage/dance1.gif'
-      },
-      {
-        name: 'sandy',
-        score: 0,
-        combo: 1,
-        img_url: 'https://storage.googleapis.com/miniwp_image-storage/dance2.gif'
-      },
-      {
-        name: 'novi',
-        score: 0,
-        combo: 1,
-        img_url: 'https://storage.googleapis.com/miniwp_image-storage/dance3.gif'
-      }
-    ],
+    players: [],
     messages: '',
     name: '',
     roomMaster: '',
@@ -49,7 +30,7 @@ export default new Vuex.Store({
       state.arrowInput.pop()
     },
     SET_PLAYER (state, payload) {
-      state.player = payload
+      state.players = payload
     }
   },
   actions: {

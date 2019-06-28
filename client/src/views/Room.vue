@@ -1,6 +1,6 @@
 <template>
 <div id="room">    
-    <div style="padding-top: 2%;">
+    <div style="padding-top: 5%;">
      <b-container style="background-color: #640F21; color: white; padding: 20px; border: 4px solid black;">
          <form @submit.prevent="create">
              <b-row>
@@ -53,16 +53,19 @@ export default {
                 players: [{
                     name: localStorage.player,
                     combo: 1,
+                    score: 0,
                     img_url: `https://storage.googleapis.com/miniwp_image-storage/dance${random}.gif`
                 }],
                 roomMaster: localStorage.getItem('player'),
-                totalPlayers: this.totalPlayers
+                totalPlayers: this.totalPlayers,
+                ready: false
             })
             .then((docRef) => {
-              this.$router.push(`/lobby/${docRef.id}`)
+                // console.log('success')
+                this.$router.push(`/lobby/${docRef.id}`)
             })
             .catch(function(error) {
-                console.log(err)
+                console.log(error)
             });
         }
     },

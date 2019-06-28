@@ -1,7 +1,12 @@
 <template>
     <div class="bg-img">
         <audio controls autoplay="true">
-            <source src="horse.ogg" type="audio/ogg">
+            <source src="https://storage.googleapis.com/miniwp_image-storage/Large-rock-concert-crowd-cheering-short.mp3" type="audio/ogg">
+            <source src="https://storage.googleapis.com/miniwp_image-storage/Large-rock-concert-crowd-cheering-short.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls autoplay="true">
+            <source src="https://storage.googleapis.com/miniwp_image-storage/lagi_syantik.mp3" type="audio/ogg">
             <source src="https://storage.googleapis.com/miniwp_image-storage/lagi_syantik.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
@@ -26,7 +31,8 @@ import Character from '@/components/Character'
 import ArrowInput from '@/components/ArrowInput'
 import ArrowList from '@/components/ArrowList'
 import Leaderboard from '@/components/Leaderboard'
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapMutations} from 'vuex'
+import db from '@/config/firebase.js'
 
 export default {
     components: {
@@ -38,8 +44,24 @@ export default {
     computed: {
         ...mapState(['players'])
     },
+    methods: {
+        ...mapMutations(['SET_PLAYER'])
+    },
     mounted() {
         
+    },
+    created() {
+        let roomId = this.$route.params.id
+        let room = db.collection("rooms").doc(roomId)
+    
+        room
+        .get()
+        .then((doc) => {
+            this.SET_PLAYER(doc.data().players)
+        })
+        .catch(err => {
+            console.log('errr', err);
+        })
     },
 }
 </script>
@@ -59,5 +81,6 @@ audio {
     background-size: auto;
     width: 100%;
     background-size: 1360px 860px;
+    height: 100vh;
 }
 </style>
