@@ -1,5 +1,5 @@
 <template>
- <b-container style="box-shadow: 0 0 10px black;background-color: rgba(168, 163, 163, 0.5);">
+ <b-container style="box-shadow: 0 0 10px black;background-color: rgba(168, 163, 163, 0.5); height: 76%; overflow:auto;">
       <b-row >
         <b-col v-for="room in rooms" :key="room.id" cols="4 my-2">
           <b-card style="background-color: whitesmoke; border: 2px solid grey;" text-variant="black">
@@ -64,7 +64,6 @@ export default {
         join(id){
             let room = db.collection('rooms').doc(id)
             let random = Math.floor(Math.random()*4)+ 1 
-            
             room
                 .get()
                 .then((doc) => {
@@ -84,7 +83,7 @@ export default {
                     })
                 })
                 .then(() => {
-                    this.$router.push(`/lobby`, id)
+                    this.$router.push(`/lobby/${id}`)
                 })
                 .catch(err => {
                     console.log(err)

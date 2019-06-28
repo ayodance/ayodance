@@ -48,8 +48,8 @@
 
           <b-list-group-item style="background-color: #EBEBEB;" class="flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
-              <b-button>Waiting...</b-button>
-              <b-button variant="success">Start</b-button>
+              <b-button><span v-if="players.length < 2">Waiting...</span><span v-if="players.length >= 2">Waiting for room master to start</span></b-button>
+              <b-button variant="success" v-if="currentPlayer === roomMaster" v-on:click.prevent="ingame(roomId)">Start</b-button>
             </div>
           </b-list-group-item>
         </div>
@@ -68,41 +68,50 @@ export default {
     return {
       message: '',
       players: [
-        'xyztestplayer',
-        'yomanyoman12',
-        'terserahgkjelas',
-        'hehehohoho'
       ],
 
       enteredMsg: [
-   
-
       ],
-
-      roomMaster: 'xyztestplayer'
+      roomId: '',
+      roomMaster: '',
+      currentPlayer: ''
     }
   },
   
-  created() {
-    db.collection("rooms").doc("FjqelcWkqklzJTY0Q4zI")
+  created() {  
+    this.roomId = this.$route.params.id
+    this.currentPlayer = localStorage.player
+    
+    db.collection("rooms").doc(this.roomId)
     .onSnapshot((doc) => {
         let messages = doc.data().messages
 
+        let players = doc.data().players
+        
+        let arr = []
+        for(let player of players) {
+          arr.push(player.name)
+        }
+        this.roomMaster = doc.data().roomMaster
         this.enteredMsg = messages
+        this.players = arr
     });
   },
   methods: {
+    ingame(id) {
+      this.$router.push(`/ingame/${id}`)
+    },
     sendMessage() {
       let date = new Date()
       
 
       let player = {
-        player: 'test_player',
+        player: localStorage.getItem('player'),
         message: this.message,
         time: `${date.getHours()}:${date.getMinutes()}`
       }
 
-      let room = db.collection("rooms").doc("FjqelcWkqklzJTY0Q4zI")
+      let room = db.collection("rooms").doc(this.roomId)
 
       room
         .get()
