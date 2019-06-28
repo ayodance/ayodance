@@ -1,23 +1,40 @@
 <template>
   <div id="app">
-      <b-card
-        title="Card Title"
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2"
-      >
-        <b-card-text>
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </b-card-text>
+    <Register v-if="!player"/>
+    <Room v-if="player"/>
 
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-    </b-card>
+      {{ $store.state.player }}
     <router-view/>
   </div>
 </template>
+<script>
+import Register from './views/Register'
+import Room from './views/Room'
+export default {
+  components:{
+    Register,
+    Room
+  },
+
+
+  data() {
+    return {
+      player: false
+    }
+  },
+  created() {
+    if(localStorage.player) {
+      this.player = true
+    }
+  },
+  watch: {
+    '$store.state.player'() {
+        this.player = true
+      
+    }
+  }
+}
+</script>
 
 <style>
 
