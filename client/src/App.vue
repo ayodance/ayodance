@@ -7,8 +7,6 @@
    <div id="lobby" v-if="player">
     <Lobby/>
    </div>
-
-   
       {{ $store.state.player }}
     <router-view/>
   </div>
