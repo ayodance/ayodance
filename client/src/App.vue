@@ -1,22 +1,28 @@
 <template>
+
   <div id="app">
     <Register v-if="!player"/>
     <Room v-if="player"/>
-
-      {{ $store.state.player }}
+    
+   <div id="lobby" v-if="player">
+    <Lobby/>
+   </div>
+      <!-- {{ $store.state.player }} -->
     <router-view/>
   </div>
 </template>
+
 <script>
 import Register from './views/Register'
 import Room from './views/Room'
+import Lobby from './components/lobby'
+
 export default {
-  components:{
+  components: {
+    Lobby,
     Register,
     Room
   },
-
-
   data() {
     return {
       player: false
@@ -36,6 +42,11 @@ export default {
 }
 </script>
 
-<style>
 
+<style>
+ #lobby {
+   height: 100vh;
+   background: url('https://wallpapercave.com/wp/17XP3In.jpg');
+   background-size: cover
+ }
 </style>
