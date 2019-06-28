@@ -22,7 +22,7 @@ export default new Router({
       component: Room
     },
     {
-      path: '/lobby',
+      path: '/lobby/:id',
       name: 'lobby',
       component: Lobby
     },
