@@ -1,11 +1,17 @@
 <template>
-    <div>
+    <div class="bg-img">
+        <audio controls autoplay="true">
+            <source src="horse.ogg" type="audio/ogg">
+            <source src="https://storage.googleapis.com/miniwp_image-storage/lagi_syantik.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
         <div>
             <Leaderboard />
         </div>
-        <Character v-for="player in players"/>
+        <Character />
 
-        <div>
+        <div class="arrows">
             <ArrowList />
             <ArrowInput />
         </div>
@@ -39,5 +45,19 @@ export default {
 </script>
 
 <style>
-
+audio { 
+   display:none;
+}
+.arrows {
+    position: absolute;
+    left: 39%;
+    top: 30%;
+    width: 250px;
+}
+.bg-img {
+    background: url('https://storage.googleapis.com/miniwp_image-storage/dance_floor.gif') no-repeat center;
+    background-size: auto;
+    width: 100%;
+    background-size: 1360px 860px;
+}
 </style>
