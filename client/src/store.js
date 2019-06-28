@@ -22,6 +22,7 @@ export default new Vuex.Store({
         combo: 1
       }
     ],
+    player: '',
     arrowCollection: ['left', 'up', 'right', 'down'],
     arrowInput: [],
     arrowList: []
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     POP_ARROW_INPUT (state) {
       state.arrowInput.pop()
+    },
+    SET_PLAYER(state, payload){
+      state.player = payload
     }
   },
   actions: {
