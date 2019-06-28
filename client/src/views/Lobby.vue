@@ -1,5 +1,5 @@
 <template>
-  <b-container class="pt-5">
+  <b-container id="lobby" class="pt-5">
     <div class="d-flex justify-content-between">
       <div class="player-chat w-75 mx-5">
         <b-list-group-item href="#" style="background-color: #66101F; color: whitesmoke;" class="flex-column align-items-start lobby-heading">
@@ -145,5 +145,11 @@ export default {
     background-color: #66101F;
 
     border: 2px solid black;
+  }
+  
+  #lobby {
+    height: 100vh;
+    background: url('https://wallpapercave.com/wp/17XP3In.jpg');
+    background-size: cover
   }
 </style>
