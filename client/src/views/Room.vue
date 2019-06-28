@@ -1,9 +1,9 @@
 <template>
 <div id="room">    
     <div style="padding-top: 5%;">
-     <b-container style="background-color: #640F21; color: white; padding: 20px;">
+     <b-container style="background-color: #640F21; color: white; padding: 20px; border: 4px solid black;">
          <form @submit.prevent="create">
-             <b-row class="">
+             <b-row>
                  <b-col sm="3">
                      <label for="roomName" style="font-weight:bold; font-size: 20px;">Room Name :</label>
                  </b-col>
@@ -46,21 +46,20 @@ export default {
     },
     methods:{
         create(){
-            let random = Math.floor(Math.random()*3)+ 1 
+            let random = Math.floor(Math.random()*4)+ 1 
             db.collection("rooms").add({
                 name: this.roomName,
                 messages: [],
                 players: [{
                     name: localStorage.player,
                     combo: 1,
-                    img: `https://storage.googleapis.com/miniwp_image-storage/dance${random}.gif`
+                    img_url: `https://storage.googleapis.com/miniwp_image-storage/dance${random}.gif`
                 }],
                 roomMaster: localStorage.getItem('player'),
                 totalPlayers: this.totalPlayers
             })
             .then(function() {
                 console.log('success')
-                this.$router.push('/lobby')
             })
             .catch(function(error) {
                 console.log(err)

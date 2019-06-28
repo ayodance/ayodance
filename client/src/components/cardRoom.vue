@@ -9,14 +9,17 @@
             <div style="height: 200px;">
                 <b-card-text style="font-size: 25px;">
                     Players:
-                <b-card-text v-for="(player, index) in room.players" :key="index">
-                    {{player.name}}
-                </b-card-text>
+                <ul style="list-style-position:inside; padding-left: 0;">
+                    <li v-for="(player, index) in room.players" :key="index" style="font-size:20px; list-style: none;">
+                        {{player.name}}
+                    </li>
+                </ul>
                 </b-card-text>
             </div>
             <div class="d-flex justify-content-between"> 
                 <h3> {{ room.players.length }} / {{room.totalPlayers}}</h3>
-                <b-button href="#" variant="primary" @click="join(room.id)" style="width:100px;">JOIN</b-button>
+                <b-button href="#" variant="primary" v-if="room.players.length < room.totalPlayers" @click="join(room.id)" style="width:100px;">JOIN</b-button>
+                <b-button variant="danger" v-if="room.players.length >= room.totalPlayers" style="width:190px;">ROOM FULL</b-button>
             </div>
           </b-card> 
         </b-col>
@@ -34,7 +37,7 @@ export default {
             players: [
                 //ambil dari database
             ],
-            rooms: []
+            rooms: [],
         }
     },
     created(){
@@ -59,7 +62,34 @@ export default {
     },
     methods:{
         join(id){
-            this.$router.push(`lobby`, id)
+            let room = db.collection('rooms').doc(id)
+            let random = Math.floor(Math.random()*4)+ 1 
+            
+            room
+                .get()
+                .then((doc) => {
+                    // console.log(doc.data())
+
+                    let players = doc.data().players
+                    
+                    let newPlayer = {
+                        name: localStorage.player,
+                        combo: 1,
+                        img_url: `https://storage.googleapis.com/miniwp_image-storage/dance${random}.gif`
+                    }
+                    players.push(newPlayer)
+
+                    return room.update({
+                        players: players
+                    })
+                })
+                .then(() => {
+                    this.$router.push(`/lobby`, id)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
         }
     }
 }
