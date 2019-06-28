@@ -9,21 +9,26 @@ export default new Vuex.Store({
       {
         name: 'lutfi',
         score: 0,
-        combo: 1
+        combo: 1,
+        img_url: 'https://storage.googleapis.com/miniwp_image-storage/dance1.gif'
       },
       {
         name: 'sandy',
         score: 0,
-        combo: 1
+        combo: 1,
+        img_url: 'https://storage.googleapis.com/miniwp_image-storage/dance2.gif'
       },
       {
         name: 'novi',
         score: 0,
-        combo: 1
+        combo: 1,
+        img_url: 'https://storage.googleapis.com/miniwp_image-storage/dance3.gif'
       }
     ],
-    player: '',
-    arrowCollection: ['left', 'up', 'right', 'down'],
+    messages: '',
+    name: '',
+    roomMaster: '',
+    arrowCollection: ['fa-chevron-left', 'fa-chevron-up', 'fa-chevron-right', 'fa-chevron-down'],
     arrowInput: [],
     arrowList: []
   },

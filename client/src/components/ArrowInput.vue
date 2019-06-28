@@ -1,16 +1,31 @@
 <template>
     <div>
-        <div>User Arrow: {{arrowInput}}</div>
+        <div class="list-input">
+            <div 
+                class="circle-input" 
+                v-for="(arr, index) in arrowInput"
+                :key="index"
+            >
+                <i 
+                    class="fas"
+                    :class="arr"
+                ></i>
+            </div>
+        </div>
         <div
             class="test"
             v-click-outside="outside"
         >
             <b-form-input 
-                placeholder=""
+                class="outline"
                 @keydown="checkKey()"
                 tabindex="0"
                 ref="arrowInput"
             ></b-form-input>
+            <div>
+                <span class="condition">{{condition}}</span>
+                <span class="combo animated bounce infinite" v-if="players[0].combo > 1">Combo {{players[0].combo}}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -19,6 +34,14 @@
 import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
+    data() {
+        return {
+            condition: ''
+        }
+    },
+    created() {
+        this.$refs.arrowInput.$el.focus()        
+    },
     mounted() {
         this.generateRandomArrow()
         this.$refs.arrowInput.$el.focus()
@@ -38,19 +61,19 @@ export default {
             if(this.arrowInput.length<4) {
                 if (e.keyCode == '38') {
                     console.log('up');
-                    this.PUSH_TO_ARROW_INPUT('up')
+                    this.PUSH_TO_ARROW_INPUT('fa-chevron-up')
                 }
                 else if (e.keyCode == '40') {
                     console.log('down');
-                    this.PUSH_TO_ARROW_INPUT('down')
+                    this.PUSH_TO_ARROW_INPUT('fa-chevron-down')
                 }
                 else if (e.keyCode == '37') {
                     console.log('left');
-                    this.PUSH_TO_ARROW_INPUT('left')
+                    this.PUSH_TO_ARROW_INPUT('fa-chevron-left')
                 }
                 else if (e.keyCode == '39') {
                     console.log('right');
-                    this.PUSH_TO_ARROW_INPUT('right')
+                    this.PUSH_TO_ARROW_INPUT('fa-chevron-right')
                 }
             }
 
@@ -66,11 +89,11 @@ export default {
         },
         arraysEqual(arr1, arr2) {
             if(arr1.toString() == arr2.toString()) {
-                console.log('DANCE~');
+                this.condition='GREAT !'
                 this.players[0].score+=this.players[0].combo*1
                 this.players[0].combo++
             }else{
-                console.log('YOU LAME!');
+                this.condition='Wrong !'
                 this.players[0].combo = 1
             }
 
@@ -115,5 +138,45 @@ export default {
 </script>
 
 <style>
+.outline {
+    position: absolute;
+    left: -99999%;
+}
+.condition {
+    position: absolute;
+    bottom: 120%;
+    font-size: 40px;
+    font-family: 'Shrikhand', cursive;
+    text-align: center;
+    color: #83ff7b;;
+    left: 18%;
+    width: 100%;
+}
 
+.list-input {
+    margin-top: 2em;
+    display: flex;
+    color: #fff;
+    /* background-color: rgba(0,0,0,0.5); */
+    padding: 8px 25px;
+    width: 360px;
+    /* border-radius: 22px; */
+    /* border: solid 2px #fff; */
+}
+.circle-input {
+    background-color: #77ea32;
+    padding: 4px 15px;
+    font-size: 35px;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+.combo {
+    color: white;
+    font-size: 32px;
+    bottom: 150%;
+    position: absolute;
+    left: 90%;
+    font-family: 'Shrikhand', cursive;
+    width: 160px;   
+}
 </style>
