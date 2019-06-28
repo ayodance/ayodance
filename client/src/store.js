@@ -5,11 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    
+    player: ''
   },
   mutations: {
-    SET_ACCESSTOKEN(state, payload) {
-
+    SET_PLAYER(state, payload){
+      state.player = payload
     }
   },
   actions: {

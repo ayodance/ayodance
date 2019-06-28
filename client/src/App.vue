@@ -1,9 +1,43 @@
 <template>
-  
-  <div id="lobby">
+
+  <div id="app">
+    <Register v-if="!player"/>
+    <Room v-if="player"/>
+   <div id="lobby">
     <Lobby/>
+   </div>
+      {{ $store.state.player }}
+    <router-view/>
   </div>
 </template>
+<script>
+import Register from './views/Register'
+import Room from './views/Room'
+export default {
+  components:{
+    Register,
+    Room
+  },
+
+
+  data() {
+    return {
+      player: false
+    }
+  },
+  created() {
+    if(localStorage.player) {
+      this.player = true
+    }
+  },
+  watch: {
+    '$store.state.player'() {
+        this.player = true
+      
+    }
+  }
+}
+</script>
 
 <script>
 import Lobby from './components/lobby'
