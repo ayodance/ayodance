@@ -7,20 +7,22 @@
    <div id="lobby" v-if="player">
     <Lobby/>
    </div>
-      {{ $store.state.player }}
+      <!-- {{ $store.state.player }} -->
     <router-view/>
   </div>
 </template>
+
 <script>
 import Register from './views/Register'
 import Room from './views/Room'
+import Lobby from './components/lobby'
+
 export default {
-  components:{
+  components: {
+    Lobby,
     Register,
     Room
   },
-
-
   data() {
     return {
       player: false
@@ -35,21 +37,6 @@ export default {
     '$store.state.player'() {
         this.player = true
       
-    }
-  }
-}
-</script>
-
-<script>
-import Lobby from './components/lobby'
-
-export default {
-  components: {
-    Lobby
-  },
-  data() {
-    return {
-
     }
   }
 }

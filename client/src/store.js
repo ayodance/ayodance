@@ -43,7 +43,7 @@ export default new Vuex.Store({
     POP_ARROW_INPUT (state) {
       state.arrowInput.pop()
     },
-    SET_PLAYER(state, payload){
+    SET_PLAYER (state, payload) {
       state.player = payload
     }
   },

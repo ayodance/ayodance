@@ -32,8 +32,9 @@
 </template>
 
 <script>
-import CardRoom from '../components/cardRoom.vue'
-import db from ''
+import CardRoom from '@/components/cardRoom.vue'
+// import db from ''
+
 export default {
     name: 'Room',
     data(){
