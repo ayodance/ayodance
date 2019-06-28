@@ -3,9 +3,12 @@
   <div id="app">
     <Register v-if="!player"/>
     <Room v-if="player"/>
-   <div id="lobby">
+    
+   <div id="lobby" v-if="player">
     <Lobby/>
    </div>
+
+   
       {{ $store.state.player }}
     <router-view/>
   </div>
