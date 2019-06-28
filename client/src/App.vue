@@ -1,24 +1,30 @@
 <template>
-  <div id="app">
-      <b-card
-        title="Card Title"
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2"
-      >
-        <b-card-text>
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </b-card-text>
-
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-    </b-card>
-    <router-view/>
+  
+  <div id="lobby">
+    <Lobby/>
   </div>
 </template>
 
-<style>
+<script>
+import Lobby from './components/lobby'
 
+export default {
+  components: {
+    Lobby
+  },
+  data() {
+    return {
+
+    }
+  }
+}
+</script>
+
+
+<style>
+ #lobby {
+   height: 100vh;
+   background: url('https://wallpapercave.com/wp/17XP3In.jpg');
+   background-size: cover
+ }
 </style>
