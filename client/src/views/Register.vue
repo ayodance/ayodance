@@ -1,6 +1,7 @@
 <template>
-    <div class="text-center" style="border: 2px black solid; margin-top: auto; margin-bottom: auto">
+    <div class="text-center" style="margin-top: auto; margin-bottom: auto">
         <div>
+            <p class="name">DANCE MAN!A</p>
             <b-card title="Register">
             <b-form inline @submit.prevent="register">
 
@@ -20,7 +21,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'Register',
     data(){
@@ -51,5 +51,9 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.name{
+    font-family: 'Bungee Inline', cursive;
+    font-size: 65px;
 }
 </style>
